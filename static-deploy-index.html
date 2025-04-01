@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A&K Agro - Agricultural Products Store</title>
+  <meta name="description" content="High quality agricultural products from A&K Agro. Shop seeds, fertilizers, tools, and more for your farming needs." />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="./favicon.ico" />
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="A&K Agro - Agricultural Products Store" />
+  <meta property="og:description" content="High quality agricultural products from A&K Agro. Shop seeds, fertilizers, tools, and more for your farming needs." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://DeepInsightCoder.github.io/ak-agro-website/" />
+  
+  <!-- Inject the app's CSS -->
+  <link rel="stylesheet" href="./index.css" />
+</head>
+<body>
+  <div id="root"></div>
+  
+  <!-- Initialize localStorage database on page load -->
+  <script>
+    // This script initializes our client-side database if it doesn't exist
+    // It runs before the React app loads to ensure data is available
+    
+    const initializeLocalStorage = () => {
+      // Check if localStorage is already initialized
+      if (localStorage.getItem('localDbInitialized')) {
+        return;
+      }
+      
+      // Initialize categories
+      const categories = [
+        {
+          id: 1,
+          name: 'Seeds',
+          slug: 'seeds',
+          description: 'High-quality agricultural seeds',
+          icon: null
+        },
+        {
+          id: 2,
+          name: 'Fertilizers',
+          slug: 'fertilizers',
+          description: 'Organic and chemical fertilizers',
+          icon: null
+        },
+        {
+          id: 3,
+          name: 'Tools',
+          slug: 'tools',
+          description: 'Farming tools and equipment',
+          icon: null
+        },
+        {
+          id: 4,
+          name: 'Pesticides',
+          slug: 'pesticides',
+          description: 'Crop protection products',
+          icon: null
+        }
+      ];
+      localStorage.setItem('categories', JSON.stringify(categories));
+      
+      // Initialize products
+      const products = [
+        {
+          id: 1,
+          name: 'Premium Wheat Seeds',
+          slug: 'premium-wheat-seeds',
+          description: 'High-yield wheat seeds for optimal crop production',
+          price: 1200,
+          originalPrice: 1500,
+          categoryId: 1,
+          image: 'https://placehold.co/600x400?text=Wheat+Seeds',
+          inStock: true,
+          badge: 'bestseller',
+          rating: 4.5,
+          reviewCount: 120,
+          createdAt: new Date().toISOString(),
+          images: null,
+          salePercentage: 20,
+          specifications: null
+        },
+        {
+          id: 2,
+          name: 'Organic Fertilizer',
+          slug: 'organic-fertilizer',
+          description: 'Natural fertilizer for healthier plants and soil',
+          price: 850,
+          originalPrice: null,
+          categoryId: 2,
+          image: 'https://placehold.co/600x400?text=Organic+Fertilizer',
+          inStock: true,
+          badge: null,
+          rating: 4.2,
+          reviewCount: 89,
+          createdAt: new Date().toISOString(),
+          images: null,
+          salePercentage: null,
+          specifications: null
+        },
+        {
+          id: 3,
+          name: 'Garden Hand Trowel',
+          slug: 'garden-hand-trowel',
+          description: 'Durable hand trowel for gardening tasks',
+          price: 350,
+          originalPrice: 450,
+          categoryId: 3,
+          image: 'https://placehold.co/600x400?text=Hand+Trowel',
+          inStock: true,
+          badge: 'sale',
+          rating: 4.0,
+          reviewCount: 56,
+          createdAt: new Date().toISOString(),
+          images: null,
+          salePercentage: 22,
+          specifications: null
+        },
+        {
+          id: 4,
+          name: 'Bio Pesticide',
+          slug: 'bio-pesticide',
+          description: 'Environmentally friendly pest control solution',
+          price: 780,
+          originalPrice: null,
+          categoryId: 4,
+          image: 'https://placehold.co/600x400?text=Bio+Pesticide',
+          inStock: true,
+          badge: 'new',
+          rating: 3.8,
+          reviewCount: 32,
+          createdAt: new Date().toISOString(),
+          images: null,
+          salePercentage: null,
+          specifications: null
+        }
+      ];
+      localStorage.setItem('products', JSON.stringify(products));
+      
+      // Initialize blog posts
+      const blogPosts = [
+        {
+          id: 1,
+          title: 'Sustainable Farming Practices',
+          slug: 'sustainable-farming-practices',
+          content: 'Learn about eco-friendly farming methods that preserve soil health and biodiversity.',
+          excerpt: 'Discover how sustainable farming can improve your yields while protecting the environment.',
+          author: 'A&K Agro Team',
+          publishedAt: new Date().toISOString(),
+          image: 'https://placehold.co/600x400?text=Sustainable+Farming',
+          featured: true
+        },
+        {
+          id: 2,
+          title: 'Guide to Crop Rotation',
+          slug: 'guide-to-crop-rotation',
+          content: 'Effective crop rotation strategies for pest management and soil fertility.',
+          excerpt: 'Improve your farm\'s productivity with these proven crop rotation techniques.',
+          author: 'A&K Agro Team',
+          publishedAt: new Date().toISOString(),
+          image: 'https://placehold.co/600x400?text=Crop+Rotation',
+          featured: true
+        },
+        {
+          id: 3,
+          title: 'Water Conservation in Agriculture',
+          slug: 'water-conservation-in-agriculture',
+          content: 'Tips and techniques for efficient water usage in your farm.',
+          excerpt: 'Learn how to reduce water consumption without compromising crop yields.',
+          author: 'A&K Agro Team',
+          publishedAt: new Date().toISOString(),
+          image: 'https://placehold.co/600x400?text=Water+Conservation',
+          featured: false
+        }
+      ];
+      localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
+      
+      // Initialize empty collections
+      localStorage.setItem('users', JSON.stringify([]));
+      localStorage.setItem('reviews', JSON.stringify([]));
+      localStorage.setItem('orders', JSON.stringify([]));
+      localStorage.setItem('orderItems', JSON.stringify([]));
+      localStorage.setItem('newsletterSubscribers', JSON.stringify([]));
+      
+      // Mark as initialized
+      localStorage.setItem('localDbInitialized', 'true');
+    };
+    
+    // Run initialization
+    initializeLocalStorage();
+  </script>
+  
+  <!-- Load the app -->
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
